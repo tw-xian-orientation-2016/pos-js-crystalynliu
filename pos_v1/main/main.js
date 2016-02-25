@@ -4,7 +4,7 @@ function getItems(Tags,allItems){
 	for(var i = 0;i<barcodes.length;i++){
 		for(j=0;j<allItems.length;j++){
 			if(barcodes[i].barcode===allItems[j].barcode){
-				var object = {Item:allItems[j],count:barcodes[i].count};
+				var object = {Item:allItems[j],count:parseInt(barcodes[i].count)};
 				products.push(object);
 			}
 		}
@@ -30,7 +30,6 @@ function getCount(Tags) {
 		}else{
 			barcodes.push(tag);
 		}
-		
 	}
 	return barcodes;
 }
