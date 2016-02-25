@@ -126,7 +126,7 @@ describe('Test the  getReceipt', function() {
       ];
   });
   var expectResult= {
-      'CartItems':{
+      'CartItems':[
         {product: {Item: {
             barcode: 'ITEM000001',
             name: '雪碧',
@@ -145,7 +145,7 @@ describe('Test the  getReceipt', function() {
             unit: '袋',
             price: 4.50
           },count:3},total:9.00,save:4.50}
-        },'totalPrice':51.00,'totalSave':7.50}
+        ],'totalPrice':51.00,'totalSave':7.50
   };
 
   it('show the total and save', function() {
