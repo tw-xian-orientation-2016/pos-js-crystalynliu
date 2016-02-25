@@ -43,3 +43,44 @@ describe('Test the Items information', function() {
   });
 
 });
+
+describe('Test the  getCartItems', function() {
+  var promotions;
+  var inputs;
+
+  beforeEach(function() {
+    promotions = loadPromotions();
+    inputs = [
+        {Item: {
+            barcode: 'ITEM000001',
+            name: '雪碧',
+            unit: '瓶',
+            price: 3.00
+          },count:5},
+        {Item:{
+            barcode: 'ITEM000003',
+            name: '荔枝',
+            unit: '斤',
+            price: 15.00
+          },count:2},
+        {Item:{
+            barcode: 'ITEM000005',
+            name: '方便面',
+            unit: '袋',
+            price: 4.50
+          },count:3}
+      ];
+  });
+  var expectResult= [
+  {product: {inputs[0],total:12.00,sava:3.00},
+  {product: {inputs[1],total:30.00,sava:0.00},
+  {product: {inputs[0],total:9.00,sava:4.50}
+  ];
+
+  it('show the total and save', function() {
+    var result = getCartItems(inputs,promotions);
+    expect(result).toEqual(expectResult);
+  });
+
+});
+
