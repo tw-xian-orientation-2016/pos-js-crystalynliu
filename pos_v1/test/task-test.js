@@ -140,7 +140,7 @@ describe('Test the  printReceipt', function() {
   var inputs;
 
   beforeEach(function() {
-    inputs = {'CartItems':[
+    inputs = {'cartItems':[
         {product: {Item: {
             barcode: 'ITEM000001',
             name: '雪碧',
@@ -159,8 +159,8 @@ describe('Test the  printReceipt', function() {
             unit: '袋',
             price: 4.50
           },count:3},total:9.00,save:4.50}
-      ],'totalPrice':51.00,'totalSave':7.50};
-  });
+      ],'totalPrice':51.00,'totalSave':7.50}
+    });
 
 var expectText =
       '***<没钱赚商店>收据***\n' +
@@ -171,8 +171,9 @@ var expectText =
       '总计：51.00(元)\n' +
       '节省：7.50(元)\n' +
       '**********************';
+
   it('show the Receipt', function() {
-    var result = getReceipt(inputs);
+    var result = printReceipt(inputs);
     expect(result).toEqual(expectText);
   });
 
