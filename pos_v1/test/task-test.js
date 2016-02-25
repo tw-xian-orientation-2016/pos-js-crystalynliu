@@ -72,9 +72,9 @@ describe('Test the  getCartItems', function() {
       ];
   });
   var expectResult= [
-  {product: {inputs[0],total:12.00,sava:3.00},
-  {product: {inputs[1],total:30.00,sava:0.00},
-  {product: {inputs[0],total:9.00,sava:4.50}
+  {product: inputs[0],total:12.00,sava:3.00},
+  {product: inputs[1],total:30.00,sava:0.00},
+  {product: inputs[0],total:9.00,sava:4.50}
   ];
 
   it('show the total and save', function() {
