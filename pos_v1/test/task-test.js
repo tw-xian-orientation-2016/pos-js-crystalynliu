@@ -72,9 +72,24 @@ describe('Test the  getCartItems', function() {
       ];
   });
   var expectResult= [
-  {product: inputs[0],total:12.00,sava:3.00},
-  {product: inputs[1],total:30.00,sava:0.00},
-  {product: inputs[0],total:9.00,sava:4.50}
+  {product: {Item: {
+            barcode: 'ITEM000001',
+            name: '雪碧',
+            unit: '瓶',
+            price: 3.00
+          },count:5},total:12.00,sava:3.00},
+  {product: {Item:{
+            barcode: 'ITEM000003',
+            name: '荔枝',
+            unit: '斤',
+            price: 15.00
+          },count:2},total:30.00,sava:0.00},
+  {product: {Item:{
+            barcode: 'ITEM000005',
+            name: '方便面',
+            unit: '袋',
+            price: 4.50
+          },count:3},total:9.00,sava:4.50}
   ];
 
   it('show the total and save', function() {
