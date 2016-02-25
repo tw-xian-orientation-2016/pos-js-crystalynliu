@@ -68,10 +68,10 @@ function getCartItems(products,promotions){
 function getReceipt(cartItems){
 	var totalPrice = 0;
 	var totalSave = 0;
-	for (var i = 0; i < cartItems.length; i++) {
-		totalPrice += cartItems[i].total;
-		totalSave += cartItems[i].save;
-	}
+	cartItems.forEach(function(cartItem){
+		totalPrice += cartItem.total;
+		totalSave += cartItem.save;
+	})
 	var Receipt = {'cartItems':cartItems,'totalPrice':totalPrice,'totalSave':totalSave};
 	return Receipt;
 }
