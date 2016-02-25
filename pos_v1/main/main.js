@@ -11,15 +11,16 @@ function printReceipt(inputs){
 }
 
 function getItems(Tags,allItems){
-	var products = [];
 	var barcodes = getCount(Tags);
-	for(var i = 0;i<barcodes.length;i++){
-		for(var j=0;j<allItems.length;j++){
-			if(barcodes[i].barcode===allItems[j].barcode){
-				products.push({Item:allItems[j],count:parseInt(barcodes[i].count)});
+	var obj;
+	var products=barcodes.map(function(barcode){
+		allItems.forEach(function(item){
+			if(barcode.barcode===item.barcode){
+				obj =  {Item:item,count:parseInt(barcode.count)};
 			}
-		}
-	}
+		})
+		return obj;
+	})
 	return products;
 }
 
