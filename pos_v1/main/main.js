@@ -33,3 +33,25 @@ function getCount(Tags) {
 	}
 	return barcodes;
 }
+
+function getCartItems(products,promotions){
+	var cartItems =[];
+	var total;var save;
+	for(var i=0;i<products.length;i++){
+		var count = products[i].count;
+		var price = products[i].Item.price;
+		for(var j=0;j<promotions[0].barcodes.length;j++){
+			if(products[i].Item.barcode==promotions[0].barcodes[j]){
+				var times=parseInt(count/3);
+				total = times>0?(count-times)*price:count*price;
+				save = times*price;
+				break;
+			}else{
+				total=count*price;
+				save=0;
+			}
+		}
+		cartItems.push({'product':products[i],'total':total,'save':save});
+	}
+	return cartItems;
+}
