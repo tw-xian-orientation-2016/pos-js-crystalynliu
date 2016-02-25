@@ -173,7 +173,7 @@ var expectText =
       '**********************';
 
   it('show the Receipt', function() {
-    var result = printReceipt(inputs);
+    var result = print(inputs);
     expect(result).toEqual(expectText);
   });
 

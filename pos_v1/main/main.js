@@ -67,7 +67,7 @@ function getReceipt(cartItems){
 	return Receipt;
 }
 
-function printReceipt(Receipt){
+function print(Receipt){
 	var receiptText ;
 	receiptText='***<没钱赚商店>收据***\n' ;
 	for (var i = 0; i < Receipt.cartItems.length; i++) {
