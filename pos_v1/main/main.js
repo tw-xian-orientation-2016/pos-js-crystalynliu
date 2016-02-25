@@ -55,3 +55,14 @@ function getCartItems(products,promotions){
 	}
 	return cartItems;
 }
+
+function getReceipt(cartItems){
+	var totalPrice = 0;
+	var totalSave = 0;
+	for (var i = 0; i < cartItems.length; i++) {
+		totalPrice += cartItems[i].total;
+		totalSave += cartItems[i].save;
+	}
+	var Receipt = {'cartItems':cartItems,'totalPrice':totalPrice,'totalSave':totalSave};
+	return Receipt;
+}
