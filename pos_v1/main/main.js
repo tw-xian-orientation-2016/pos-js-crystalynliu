@@ -16,7 +16,7 @@ function getCount(Tags) {
 	var barcodes=[];
 	for(var i = 0;i<Tags.length;i++){
 		var stringArr = Tags[i].split('-');
-		var tag = {'barcode':stringArr[0],'count':0};
+		var tag = {'barcode':stringArr[0],'count':1};
 		if(stringArr.length>1){
 			tag.count = stringArr[1];
 		}
