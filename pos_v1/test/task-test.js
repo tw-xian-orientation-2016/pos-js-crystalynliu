@@ -125,32 +125,13 @@ describe('Test the  getReceipt', function() {
           },count:3},total:9.00,save:4.50}
       ];
   });
-  var expectResult= {
-      'CartItems':[
-        {product: {Item: {
-            barcode: 'ITEM000001',
-            name: '雪碧',
-            unit: '瓶',
-            price: 3.00
-          },count:5},total:12.00,save:3.00},
-        {product: {Item:{
-            barcode: 'ITEM000003',
-            name: '荔枝',
-            unit: '斤',
-            price: 15.00
-          },count:2},total:30.00,save:0.00},
-        {product: {Item:{
-            barcode: 'ITEM000005',
-            name: '方便面',
-            unit: '袋',
-            price: 4.50
-          },count:3},total:9.00,save:4.50}
-        ],'totalPrice':51.00,'totalSave':7.50
-  };
+  var expectPrice = 51.00;
+  var expectSave =7.50
 
   it('show the total and save', function() {
     var result = getReceipt(inputs);
-    expect(result).toEqual(expectResult);
+    expect(result.totalPrice).toEqual(expectPrice);
+    expect(result.totalSave).toEqual(expectSave);
   });
 
 });
