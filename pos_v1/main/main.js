@@ -28,17 +28,14 @@ function getCount(Tags) {
 	var barcodes=[];
 	for(var i = 0;i<Tags.length;i++){
 		var stringArr = Tags[i].split('-');
-		var tag = {'barcode':stringArr[0],'count':1};
-		if(stringArr.length>1){
-			tag.count = stringArr[1];
+		var tag = {'barcode':stringArr[0],
+		'count':stringArr.length>1?stringArr[1]:1};
+		if(barcodes.length===0){
+			barcodes.push(tag);
+			continue;
 		}
-		if(barcodes.length!=0){
-			if(barcodes[barcodes.length-1].barcode==tag.barcode){
-				barcodes[barcodes.length-1].count++;
-			}
-			else{
-				barcodes.push(tag);
-			}
+		if(barcodes[barcodes.length-1].barcode===tag.barcode){
+			barcodes[barcodes.length-1].count++;
 		}else{
 			barcodes.push(tag);
 		}
