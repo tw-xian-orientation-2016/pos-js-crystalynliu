@@ -1,3 +1,15 @@
+function printReceipt(inputs){
+	var allItems = loadAllItems();
+	var promotions = loadPromotions() ;
+
+	var products = getItems(inputs,allItems);
+	var cartItems = getCartItems(products,promotions);
+	var Receipt = getReceipt(cartItems);
+	var printText = print(Receipt);
+
+	console.log(printText);
+}
+
 function getItems(Tags,allItems){
 	var products = [];
 	var barcodes = getCount(Tags);
