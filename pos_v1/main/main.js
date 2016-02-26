@@ -10,37 +10,49 @@ function printReceipt(inputs){
 	console.log(printText);
 }
 
+
 function getItems(Tags,allItems){
-	var barcodes = getCount(Tags);
-	var obj;
-	var products=barcodes.map(function(barcode){
-		allItems.forEach(function(item){
-			if(barcode.barcode===item.barcode){
-				obj =  {Item:item,count:parseInt(barcode.count)};
-			}
-		})
-		return obj;
-	})
-	return products;
+  var barcodeCounts = getBarcodeCounts(Tags);
+  var product;
+  var products = barcodeCounts.map(function(barcodeCount){
+    allItems.forEach(function(item){
+      if(barcodeCount.barcode===item.barcode){
+        product =  {Item:item,count:barcodeCount.count}; 
+      }
+    })
+    return product;
+  })
+  return products;
 }
 
-function getCount(Tags) {
-	var barcodes=[];
-	for(var i = 0;i<Tags.length;i++){
-		var stringArr = Tags[i].split('-');
-		var tag = {'barcode':stringArr[0],
-		'count':stringArr.length>1?stringArr[1]:1};
-		if(barcodes.length===0){
-			barcodes.push(tag);
-			continue;
-		}
-		if(barcodes[barcodes.length-1].barcode===tag.barcode){
-			barcodes[barcodes.length-1].count++;
-		}else{
-			barcodes.push(tag);
-		}
-	}
-	return barcodes;
+function getBarcodeCounts(Tags) {
+  var barcodeCounts=[];
+  var index;
+  Tags.forEach(function(tag){
+
+    var tagArr = tag.split('-');
+    var barcode = tagArr[0];
+    var count = parseFloat(tagArr[1] || 1);
+
+    index = findBarcodeIndex(barcodeCounts,barcode);
+    if(barcodeCounts.length === 0 || index === undefined){
+      barcodeCounts.push({barcode:barcode,count:count});
+    }else{
+      barcodeCounts[index].count += count;
+    }
+
+  })
+
+  return barcodeCounts;
+}
+
+
+function findBarcodeIndex(barcodeCounts,barcode){
+    for (var i = 0; i < barcodeCounts.length; i++) {
+      if(barcodeCounts[i].barcode===barcode){
+        return i;
+      }
+    }
 }
 
 function getCartItems(products,promotions){
