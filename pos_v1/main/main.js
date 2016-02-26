@@ -105,28 +105,26 @@ function getReceipt(cartItems){
 function print(Receipt){
 	var receiptText ;
 	receiptText='***<没钱赚商店>收据***\n' ;
-	for (var i = 0; i < Receipt.cartItems.length; i++) {
-		receiptText+="名称："+Receipt.cartItems[i].product.Item.name+"，数量："+Receipt.cartItems[i].product.count+
-		Receipt.cartItems[i].product.Item.unit+"，单价："+getFloatStr(Receipt.cartItems[i].product.Item.price)+"(元)，小计："+getFloatStr(Receipt.cartItems[i].total)+
-		'(元)\n';
-	}
+  Receipt.cartItems.forEach(function(cartItem){
+    receiptText+=
+    "名称："+cartItem.product.Item.name+
+    "，数量："+cartItem.product.count+cartItem.product.Item.unit+
+    "，单价："+priceFormat(cartItem.product.Item.price)+
+    "(元)，小计："+priceFormat(cartItem.total)+
+    '(元)\n';
+  })
+
 	receiptText+='----------------------\n' +
-	'总计：'+getFloatStr(Receipt.totalPrice)+'(元)\n' +
-	'节省：'+getFloatStr(Receipt.totalSave)+'(元)\n' +'**********************' ;
+	'总计：'+priceFormat(Receipt.totalPrice)+'(元)\n' +
+	'节省：'+priceFormat(Receipt.totalSave)+'(元)\n' +
+  '**********************' ;
 	return receiptText;
 }
 
-var getFloatStr = function(num){
-        num += '';
-        num = num.replace(/[^0-9|\.]/g, ''); //清除字符串中的非数字非.字符
-        
-        if(/^0+/) //清除字符串开头的0
-            num = num.replace(/^0+/, '');
-        if(!/\./.test(num)) //为整数字符串在末尾添加.00
-            num += '.00';
-        if(/^\./.test(num)) //字符以.开头时,在开头添加0
-            num = '0' + num;
-        num += '00';        //在字符串末尾补零
-        num = num.match(/\d+\.\d{2}/)[0];
-        return num;
-    };
+function priceFormat(price){
+  if(!/\./.test(price)) //为整数字符串在末尾添加.00
+      price += '.00';
+  price += '00';        //在字符串末尾补零
+  price = price.match(/\d+\.\d{2}/)[0];
+  return price;
+};
