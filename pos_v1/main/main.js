@@ -57,24 +57,38 @@ function findBarcodeIndex(barcodeCounts,barcode){
 
 function getCartItems(products,promotions){
 	var cartItems =[];
-	var total;var save;
-	cartItems = products.map(function(product){
+  var type;
+	
+	return cartItems = products.map(function(product){
 		var count = product.count;
 		var price = product.Item.price;
-		for(var j=0;j<promotions[0].barcodes.length;j++){
-			if(product.Item.barcode==promotions[0].barcodes[j]){
-				var times=parseInt(count/3);
-				total = times>0?(count-times)*price:count*price;
-				save = times*price;
-				break;
-			}else{
-				total=count*price;
-				save=0;
-			}
-		}
+    
+    var total = price*count;
+    var save = 0; 
+
+    type = findCartItemType(product.Item.barcode,promotions);
+    if(type){
+      save = calculateSave(count,price);
+      total =total-save;
+    }
 		return {'product':product,'total':total,'save':save};
 	})
-	return cartItems;
+}
+
+function findCartItemType(barcode,promotions){
+  for(var i = 0; i < promotions.length;i++){
+     barcodes = promotions[i].barcodes;
+     for(var k = 0;k < barcodes.length;k++){
+      if(barcode===barcodes[k]){
+        return promotions[i].type;
+      }
+     }
+  }
+}
+
+function calculateSave(count,price){
+  var times = parseInt(count/3);
+  return times*price;
 }
 
 function getReceipt(cartItems){
