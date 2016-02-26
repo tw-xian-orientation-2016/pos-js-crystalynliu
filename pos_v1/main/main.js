@@ -14,7 +14,7 @@ function printReceipt(inputs){
 function getItems(Tags,allItems){
   var barcodeCounts = getBarcodeCounts(Tags);
   var product;
-  var products = barcodeCounts.map(function(barcodeCount){
+  return products = barcodeCounts.map(function(barcodeCount){
     allItems.forEach(function(item){
       if(barcodeCount.barcode===item.barcode){
         product =  {Item:item,count:barcodeCount.count}; 
@@ -22,7 +22,6 @@ function getItems(Tags,allItems){
     })
     return product;
   })
-  return products;
 }
 
 function getBarcodeCounts(Tags) {
@@ -98,13 +97,12 @@ function getReceipt(cartItems){
 		totalPrice += cartItem.total;
 		totalSave += cartItem.save;
 	})
-	var Receipt = {'cartItems':cartItems,'totalPrice':totalPrice,'totalSave':totalSave};
-	return Receipt;
+	return {'cartItems':cartItems,'totalPrice':totalPrice,'totalSave':totalSave};
 }
 
 function print(Receipt){
-	var receiptText ;
-	receiptText='***<没钱赚商店>收据***\n' ;
+
+	var receiptText='***<没钱赚商店>收据***\n' ;
   Receipt.cartItems.forEach(function(cartItem){
     receiptText+=
     "名称："+cartItem.product.Item.name+
